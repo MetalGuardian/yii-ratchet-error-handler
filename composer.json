@@ -1,0 +1,22 @@
+{
+    "name": "metalguardian/yii-ratchet-error-handler",
+    "description": "",
+    "type": "yii-extension",
+    "keywords": ["yii","extension","ratchet","error handler","logger"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Pushkin",
+            "email": "imetalguardi+yii@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii": "*",
+        "rollbar/rollbar": "~0.9.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "metalguardian\\rollbar\\": "src"
+        }
+    }
+}
