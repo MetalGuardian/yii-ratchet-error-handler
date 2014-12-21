@@ -11,13 +11,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist metalguardian/yii-ratchet-error-handler "*"
+php composer.phar require metalguardian/yii-ratchet-error-handler "dev-master"
 ```
 
 or add
 
 ```
-"metalguardian/yii-ratchet-error-handler": "*"
+"metalguardian/yii-ratchet-error-handler": "dev-master"
 ```
 
 to the require section of your `composer.json` file.
@@ -29,6 +29,7 @@ Usage
 Once the extension is installed, simply use it in your configuration file :
 
 ```php
+array(
     'preload' => array(
         // ...
         'rollbar',
@@ -43,7 +44,23 @@ Once the extension is installed, simply use it in your configuration file :
         ),
         'errorHandler' => array(
             'class' => '\metalguardian\rollbar\ErrorHandler',
+            'ignoreException' => function ($exception) {
+                /** @var \CHttpException $exception */
+                // ignore 404 exceptions
+                if ($exception instanceof \CHttpException && $exception->statusCode == 404) {
+                    return true;
+                }
+                // ignore 403 exceptions
+                if ($exception instanceof \CHttpException && $exception->statusCode == 403) {
+                    return true;
+                }
+                // other ignores
+
+                return false;
+            },
+        ),
+
         ),
     // ...
-]
+)
 ```
