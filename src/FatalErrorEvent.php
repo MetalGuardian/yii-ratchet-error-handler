@@ -12,7 +12,6 @@ namespace metalguardian\rollbar;
  */
 class FatalErrorEvent extends \CEvent
 {
-
 	/**
 	 * @var \ErrorException the exception that this event is about.
 	 */
@@ -28,5 +27,25 @@ class FatalErrorEvent extends \CEvent
 	{
 		$this->exception = $exception;
 		parent::__construct($sender);
+	}
+
+	public function getCode()
+	{
+		return $this->exception->getCode();
+	}
+
+	public function getMessage()
+	{
+		return $this->exception->getMessage();
+	}
+
+	public function getFile()
+	{
+		return $this->exception->getFile();
+	}
+
+	public function getLine()
+	{
+		return $this->exception->getLine();
 	}
 }
